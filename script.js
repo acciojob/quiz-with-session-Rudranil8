@@ -50,6 +50,9 @@ function renderQuestions() {
 }
 renderQuestions();
 // starts here
+
+let userAnswers = JSON.parse(sessionStorage.getItem('progress')) || [];
+
 choiceElement.addEventListener('change', function() {
   userAnswers[i] = this.value;
   sessionStorage.setItem('progress', JSON.stringify(userAnswers));
@@ -64,5 +67,3 @@ document.getElementById('submit').addEventListener('click', function() {
   document.getElementById('score').innerText = 'Your score is ' + score + ' out of ' + questions.length + '.';
   localStorage.setItem('score', score);
 });
-
-let userAnswers = JSON.parse(sessionStorage.getItem('progress')) || [];
