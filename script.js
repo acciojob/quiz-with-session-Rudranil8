@@ -50,13 +50,18 @@ function renderQuestions() {
 }
 renderQuestions();
 // starts here
-
 let userAnswers = JSON.parse(sessionStorage.getItem('progress')) || [];
 
-choiceElement.addEventListener('change', function() {
-  userAnswers[i] = this.value;
-  sessionStorage.setItem('progress', JSON.stringify(userAnswers));
-});
+// choiceElement.addEventListener('change', function() {
+//   userAnswers[i] = this.value;
+//   sessionStorage.setItem('progress', JSON.stringify(userAnswers));
+// });
+choiceElement.addEventListener('change', (function(i, choice) {
+  return function() {
+    userAnswers[i] = choice;
+    sessionStorage.setItem('progress', JSON.stringify(userAnswers));
+  }
+})(i, choice));
 document.getElementById('submit').addEventListener('click', function() {
   let score = 0;
   for (let i = 0; i < questions.length; i++) {
