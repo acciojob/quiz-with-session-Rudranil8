@@ -1,7 +1,3 @@
-//your JS code here.
-
-// Do not change code below this line
-// This code will just display the questions to the screen
 const questions = [
   {
     question: "What is the capital of France?",
@@ -30,7 +26,6 @@ const questions = [
   },
 ];
 
-// Display the quiz questions and choices
 function renderQuestions() {
   for (let i = 0; i < questions.length; i++) {
     const question = questions[i];
@@ -54,3 +49,20 @@ function renderQuestions() {
   }
 }
 renderQuestions();
+// starts here
+choiceElement.addEventListener('change', function() {
+  userAnswers[i] = this.value;
+  sessionStorage.setItem('progress', JSON.stringify(userAnswers));
+});
+document.getElementById('submit').addEventListener('click', function() {
+  let score = 0;
+  for (let i = 0; i < questions.length; i++) {
+    if (userAnswers[i] === questions[i].answer) {
+      score++;
+    }
+  }
+  document.getElementById('score').innerText = 'Your score is ' + score + ' out of ' + questions.length + '.';
+  localStorage.setItem('score', score);
+});
+
+let userAnswers = JSON.parse(sessionStorage.getItem('progress')) || [];
