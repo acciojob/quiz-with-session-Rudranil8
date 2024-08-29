@@ -50,13 +50,8 @@ function renderQuestions() {
 }
 renderQuestions();
 // starts here
-let userAnswers = JSON.parse(sessionStorage.getItem('progress')) || [];
-
-// choiceElement.addEventListener('change', function() {
-//   userAnswers[i] = this.value;
-//   sessionStorage.setItem('progress', JSON.stringify(userAnswers));
-// });
-choiceElement.addEventListener('change', (function(i, choice) {
+const questionsElement = document.getElementById('questions');
+choiceElement.addEventListener('change', ((i, choice) => {
   return function() {
     userAnswers[i] = choice;
     sessionStorage.setItem('progress', JSON.stringify(userAnswers));
